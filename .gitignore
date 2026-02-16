@@ -1,0 +1,10 @@
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+
+# Ignore environment files
+.env
+venv/
+.vscode/
+
+# Ignore sensitive database configs if you create a separate config file

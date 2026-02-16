@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Inventory Management Agent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>INVENTORY TRACKER AGENT</h1>
+            <p>Intelligent stock monitoring, automated reordering, and sales analytics</p>
+            <div style="display:flex; gap:10px; align-items:center;">
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" title="Toggle Theme">
+        <div class="toggle-slider"></div>
+    </button>
+
+    <!-- Logout Button -->
+    <button class="logout-btn" onclick="logoutUser()">
+        Logout
+    </button>
+
+</div>
+
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="overview">Overview</button>
+            <button class="tab-btn" data-tab="inventory">Inventory</button>
+            <button class="tab-btn" data-tab="sales">Sales Analysis</button>
+            <button class="tab-btn" data-tab="alerts">Alerts</button>
+            <button class="tab-btn" data-tab="orders">Purchase Orders</button>
+            <button class="tab-btn" data-tab="actions">Actions</button>
+        </div>
+
+        <div id="tab-content" class="tab-content">
+            <!-- Content will be loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Modal for forms (if needed) -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory OS | Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #fbbf24;
+            --emerald: #10b981;
+            --dark-surface: #064e3b;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #030112;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* 3D Moving Mesh Background */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .signup-card {
+            background: rgba(6, 78, 59, 0.4);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--emerald);
+            padding: 50px;
+            border-radius: 40px 0 40px 0; /* Stylized 3D shape */
+            width: 400px;
+            z-index: 1;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.8);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: 0.5s;
+        }
+
+        .signup-card:hover {
+            transform: perspective(1000px) rotateY(0deg);
+            box-shadow: 0 0 40px var(--emerald);
+        }
+
+        h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px var(--gold);
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            border-bottom: 2px solid var(--emerald);
+            color: white;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            background: rgba(255,255,255,0.1);
+            outline: none;
+            border-bottom-color: var(--gold);
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 18px;
+            background: var(--emerald);
+            border: none;
+            color: #022c22;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 0 20px var(--emerald);
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: var(--gold);
+            box-shadow: 0 0 30px var(--gold);
+            transform: scale(1.05);
+        }
+
+        p { text-align: center; color: #a7f3d0; margin-top: 20px; }
+        a { color: var(--gold); text-decoration: none; font-weight: bold; }
+
+        .error-shake { animation: shake 0.5s; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="signup-card">
+    <h2>new enrollment</h2>
+    <div class="input-box">
+        <input type="text" id="username" placeholder="GLOBALLY UNIQE USERNAME" autocomplete="off">
+    </div>
+    <div class="input-box">
+        <input type="password" id="password" placeholder="SECURE ENCRYPTION PASSWORD">
+    </div>
+    <button onclick="signup()">Register</button>
+    <p>Existing on? <a href="/login">Return to login</a></p>
+</div>
+
+<script>
+    // Particle Animation
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let dots = [];
+    for(let i=0; i<80; i++) dots.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, v: Math.random()*0.5 + 0.2});
+
+    function draw() {
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+        ctx.fillStyle = "#10b981";
+        dots.forEach(d => {
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, 2, 0, Math.PI*2);
+            ctx.fill();
+            d.y -= d.v;
+            if(d.y < 0) d.y = canvas.height;
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+
+    async function signup() {
+        const u = document.getElementById('username');
+        const p = document.getElementById('password');
+
+        if (!u.value.trim() || !p.value.trim()) {
+            document.querySelector('.signup-card').classList.add('error-shake');
+            alert("⚠️ ALL FIELDS REQUIRED");
+            setTimeout(() => document.querySelector('.signup-card').classList.remove('error-shake'), 500);
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/signup', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ username: u.value, password: p.value })
+            });
+
+            const data = await res.json();
+            if (res.status === 409) {
+                alert("⚠️ IDENTITY ALREADY REGISTERED");
+            } else if (res.ok) {
+                alert("✅ SUCCESS! User ID: " + data.user_id);
+                window.location.href = "/login";
+            }
+        } catch (err) { alert("CONNECTION FAILED"); }
+    }
+</script>
+</body>
+</html>
+
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+
+<h2>Sign Up</h2>
+
+<input type="text" id="username" placeholder="Username"><br><br>
+<input type="password" id="password" placeholder="Password"><br><br>
+
+<button onclick="signup()">Register</button>
+<p>Already have account? <a href="/login">Login</a></p>
+
+<script>
+async function signup() {
+    const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            username: username.value,
+            password: password.value
+        })
+    });
+
+    const data = await res.json();
+    alert("User created! Your ID: " + data.user_id);
+    window.location.href = "/login";
+}
+</script>
+
+</body>
+</html>  -->
