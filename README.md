@@ -1,28 +1,28 @@
 # AI Inventory Management Agent
-
+# deployed to : http://52.66.205.200:5000/login
 An intelligent, interactive inventory management system with AI-powered analytics and automated decision-making capabilities.
 
 ##  Features
 
-### ✅ Stock Monitoring
+###  Stock Monitoring
 - **Continuous Tracking**: Real-time monitoring of product quantities
 - **Automatic Detection**: Identifies low stock levels automatically
 - **Smart Alerts**: Notifies when stock reaches minimum safety levels
 - **Visual Dashboard**: Interactive charts and status indicators
 
-### ✅ Auto Reorder Suggestion
+###  Auto Reorder Suggestion
 - **Intelligent Recommendations**: Suggests optimal reorder quantities
 - **Priority-Based Alerts**: Highlights critical items needing immediate attention
 - **EOQ Calculations**: Uses Economic Order Quantity formulas for cost optimization
 - **Draft Purchase Orders**: Generates ready-to-use purchase order templates
 
-### ✅ Sales Analysis
+###  Sales Analysis
 - **Fast-Moving Items**: Identifies top-performing products
 - **Slow-Moving Stock**: Highlights underperforming inventory
 - **Trend Analysis**: Monthly/weekly/daily sales summaries
 - **Revenue Tracking**: Comprehensive sales and revenue analytics
 
-### ✅ Expiry Monitoring
+###  Expiry Monitoring
 - **Expiration Alerts**: Detects products nearing expiry dates
 - **Time-Based Warnings**: Configurable alert periods (default: 30 days)
 - **Clearance Suggestions**: Recommends discount strategies for expiring stock
@@ -35,7 +35,7 @@ An intelligent, interactive inventory management system with AI-powered analytic
 - **Charts**: Chart.js for data visualization
 - **AI Logic**: Custom algorithms for inventory optimization
 
-## 📊 Dashboard Sections
+##  Dashboard Sections
 
 ### Overview Tab
 - Real-time stock status charts
@@ -96,7 +96,7 @@ An intelligent, interactive inventory management system with AI-powered analytic
 - revenue
 ```
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 1. **Clone the repository**
    ```bash
@@ -111,7 +111,7 @@ An intelligent, interactive inventory management system with AI-powered analytic
 
 3. **Setup MySQL Database**
    - Ensure MySQL server is running
-   - Update database credentials in `scripts/inventory_agent.py` and `scripts/db_connection.py`
+   - Update database credentials in `scripts/inventory_agent.py` and create a .env file that have the following credentials in the inventory_agent.py
    - Run the database setup:
    ```bash
    python -c "
@@ -129,7 +129,7 @@ An intelligent, interactive inventory management system with AI-powered analytic
    - Open browser to `http://localhost:5000`
    - Explore the interactive dashboard
 
-## 🎯 Usage Examples
+##  Usage Examples
 
 ### Recording a Sale
 1. Navigate to "Actions" tab
@@ -146,7 +146,7 @@ An intelligent, interactive inventory management system with AI-powered analytic
 2. Items expiring within 30 days are highlighted
 3. Plan clearance sales accordingly
 
-## 🤖 AI Agent Features
+##  AI Agent Features
 
 ### Economic Order Quantity (EOQ)
 The system calculates optimal order quantities using the classic EOQ formula:
@@ -193,7 +193,7 @@ EOQ = √((2 × Annual Demand × Order Cost) / Holding Cost)
 - `POST /api/record-sale` - Record a new sale
 - `POST /api/update-stock` - Update stock levels
 
-## 🎨 Customization
+##  Customization
 
 ### Styling
 - Modify `static/style.css` for custom themes
@@ -209,7 +209,7 @@ EOQ = √((2 × Annual Demand × Order Cost) / Holding Cost)
 - Extend sales tracking fields
 - Implement additional analytics
 
-## 📝 Future Enhancements
+##  Future Enhancements
 
 - [ ] Predictive demand forecasting using ML
 - [ ] Automated supplier integration
@@ -218,7 +218,7 @@ EOQ = √((2 × Annual Demand × Order Cost) / Holding Cost)
 - [ ] Advanced reporting with PDF export
 - [ ] Integration with popular e-commerce platforms
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -231,4 +231,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**Built with ❤️ for efficient inventory management**
+**Built with dedication for efficient inventory management**
